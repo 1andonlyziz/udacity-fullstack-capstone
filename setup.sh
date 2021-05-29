@@ -1,7 +1,3 @@
-export AUTH0_DOMAIN='dev-kc9n7g7t.eu.auth0.com'
-export ALGORITHMS=['RS256']
-export API_AUDIENCE='capstone'
-export CLIENT_ID='jbivPBwfyhbCqPvLCe4CGYNeRj2KSeRX'
 export FLASK_APP=app.py
 export DATABASE_URL=''
 export casting_assistant=''
