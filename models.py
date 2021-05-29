@@ -38,7 +38,6 @@ class Movie(db.Model):
     id = Column(Integer, primary_key=True)
     title = Column(String)
     release_date = Column(Date)
-    test = Column(String)
 
     def __init__(self, title, release_date):
 
