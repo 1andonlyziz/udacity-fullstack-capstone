@@ -1,5 +1,5 @@
 import os
-from sqlalchemy import Column, String, Integer,Date ,create_engine
+from sqlalchemy import Column, String, Integer, Date, create_engine
 from flask_sqlalchemy import SQLAlchemy
 import json
 
@@ -7,12 +7,15 @@ database_name = "capstone"
 database_path = "postgres://{}/{}".format(
     'postgres:1234@localhost:5432', database_name)
 
+#database_path = os.environ['DATABASE_URL']
+
 db = SQLAlchemy()
 
 '''
 setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
+
 
 def setup_db(app, database_path=database_path):
 
@@ -29,13 +32,14 @@ Movies with attributes title and release date
 
 '''
 
+
 class Movie(db.Model):
 
-    id = Column(Integer,primary_key=True)
+    id = Column(Integer, primary_key=True)
     title = Column(String)
     release_date = Column(Date)
 
-    def __init__(self, title,release_date):
+    def __init__(self, title, release_date):
 
         self.title = title
         self.release_date = release_date
@@ -65,14 +69,14 @@ Actors with attributes name, age and gender
 
 '''
 
+
 class Actor(db.Model):
 
-    id=Column(Integer,primary_key=True)
-    name=Column(String)
-    age=Column(Integer)
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    age = Column(Integer)
 
-
-    def __init__(self, name,age):
+    def __init__(self, name, age):
 
         self.name = name
         self.age = age
