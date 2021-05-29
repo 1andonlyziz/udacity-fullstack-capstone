@@ -5,7 +5,7 @@ from flask.wrappers import Response
 from flask_sqlalchemy import SQLAlchemy
 
 from app import create_app
-from database.models import setup_db, Actor, Movie
+from models import setup_db, Actor, Movie
 
 
 class CapstoneTestCase(unittest.TestCase):
