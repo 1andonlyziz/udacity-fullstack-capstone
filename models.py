@@ -8,7 +8,7 @@ import json
 #    'postgres:1234@localhost:5432', database_name)
 
 database_path = os.environ['DATABASE_URL']
-
+# postgres://fpissxnijebryv:63578031950cd61e5414e8a7190536fda44fe781ac71fda5d09137727a17bee8@ec2-34-230-115-172.compute-1.amazonaws.com:5432/da6dd4k4oju1q2
 db = SQLAlchemy()
 
 '''
