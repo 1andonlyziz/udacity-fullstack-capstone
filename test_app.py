@@ -19,8 +19,7 @@ class CapstoneTestCase(unittest.TestCase):
         self.casting_director = os.environ['casting_director']
         self.executive_producer = os.environ['executive_producer']
         self.database_name = "capstone_test"
-        self.database_path = "postgres://{}/{}".format(
-            'postgres:1234@localhost:5432', self.database_name)
+        self.database_path = os.environ['DATABASE_URL']
         setup_db(self.app, self.database_path)
 
         # binds the app to the current context
