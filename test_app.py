@@ -113,6 +113,14 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data['success'], True)
 
+    def error_404_test_edit_actor(self):
+
+        response = self.client().patch('/actors/999',
+                                       headers={'Authorization': "Bearer {}".format(self.casting_director)}, json={'name': 'Neo Martin'})
+        data = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 404)
+
     def test_delete_actor(self):
 
         response = self.client().delete('/actors/1',
@@ -124,8 +132,18 @@ class CapstoneTestCase(unittest.TestCase):
 
         self.assertEqual(deleted_actor, None)
 
+    def error_404_test_delete_actor(self):
+
+        response = self.client().delete('/actors/999',
+                                        headers={'Authorization': "Bearer {}".format(self.casting_director)})
+
+        deleted_actor = Actor.query.filter_by(id=999).one_or_none()
+
+        self.assertEqual(response.status_code, 404)
+
 
 # -------------------------------------------------------------------------------------------------
+
 
     def test_get_all_movies(self):
 
@@ -160,6 +178,14 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data['success'], True)
 
+    def error_404_test_edit_movie(self):
+
+        response = self.client().patch('/movies/999',
+                                       headers={'Authorization': "Bearer {}".format(self.casting_director)}, json={'title': 'interstellar 2'})
+        data = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 404)
+
     def test_delete_movie(self):
 
         response = self.client().delete('/movies/1', headers={
@@ -169,6 +195,16 @@ class CapstoneTestCase(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(deleted_movie, None)
+
+    def error_404_test_delete_movie(self):
+
+        response = self.client().delete('/movies/999', headers={
+            'Authorization': "Bearer {}".format(self.executive_producer)})
+
+        deleted_movie = Movie.query.filter_by(id=999).one_or_none()
+
+        self.assertEqual(response.status_code, 404)
+
 
 # -------------------------------------------------------------------------------------------------
 
