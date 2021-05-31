@@ -55,8 +55,10 @@ class CapstoneTestCase(unittest.TestCase):
             'release_date': '2022-12-12'
         }
 
-        response = self.client().post('/movies', headers={
-            'Authorization': "Bearer {}".format(self.casting_assistant)}, json=movie_dict)
+        response = self.client().post('/movies',
+                                      headers={'Authorization': "Bearer {}".
+                                               format(self.casting_assistant)},
+                                      json=movie_dict)
 
         data = json.loads(response.data)
 
@@ -67,7 +69,9 @@ class CapstoneTestCase(unittest.TestCase):
     def test_delete_actor_with_unautorized_token_permission(self):
 
         response = self.client().delete('/actors/1',
-                                        headers={'Authorization': "Bearer {}".format(self.casting_assistant)})
+                                        headers={'Authorization': "Bearer {}".
+                                                 format(self.casting_assistant)
+                                                 })
 
         deleted_actor = Actor.query.filter_by(id=1).one_or_none()
 
@@ -80,7 +84,10 @@ class CapstoneTestCase(unittest.TestCase):
     def test_get_all_actors(self):
 
         response = self.client().get(
-            '/actors', headers={'Authorization': "Bearer {}".format(self.casting_assistant)})
+            '/actors',
+            headers={'Authorization': "Bearer {}"
+                     .format(self.casting_assistant)
+                     })
 
         data = json.loads(response.data)
 
@@ -96,7 +103,8 @@ class CapstoneTestCase(unittest.TestCase):
         }
 
         response = self.client().post('/actors', headers={
-            'Authorization': "Bearer {}".format(self.casting_director)}, json=actor_dict)
+            'Authorization': "Bearer {}"
+            .format(self.casting_director)}, json=actor_dict)
 
         data = json.loads(response.data)
 
@@ -107,7 +115,10 @@ class CapstoneTestCase(unittest.TestCase):
     def test_edit_actor(self):
 
         response = self.client().patch('/actors/1',
-                                       headers={'Authorization': "Bearer {}".format(self.casting_director)}, json={'name': 'Neo Martin'})
+                                       headers={'Authorization': "Bearer {}".
+                                                format(self.casting_director)
+                                                }, json={'name': 'Neo Martin'}
+                                       )
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
@@ -116,7 +127,10 @@ class CapstoneTestCase(unittest.TestCase):
     def error_404_test_edit_actor(self):
 
         response = self.client().patch('/actors/999',
-                                       headers={'Authorization': "Bearer {}".format(self.casting_director)}, json={'name': 'Neo Martin'})
+                                       headers={'Authorization': "Bearer {}".
+                                                format(self.casting_director)
+                                                }, json={'name': 'Neo Martin'}
+                                       )
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 404)
@@ -124,7 +138,9 @@ class CapstoneTestCase(unittest.TestCase):
     def test_delete_actor(self):
 
         response = self.client().delete('/actors/1',
-                                        headers={'Authorization': "Bearer {}".format(self.casting_director)})
+                                        headers={'Authorization': "Bearer {}".
+                                                 format(self.casting_director)
+                                                 })
 
         deleted_actor = Actor.query.filter_by(id=1).one_or_none()
 
@@ -135,20 +151,23 @@ class CapstoneTestCase(unittest.TestCase):
     def error_404_test_delete_actor(self):
 
         response = self.client().delete('/actors/999',
-                                        headers={'Authorization': "Bearer {}".format(self.casting_director)})
+                                        headers={'Authorization': "Bearer {}".
+                                                 format(self.casting_director)
+                                                 })
 
         deleted_actor = Actor.query.filter_by(id=999).one_or_none()
 
         self.assertEqual(response.status_code, 404)
 
-
 # -------------------------------------------------------------------------------------------------
-
 
     def test_get_all_movies(self):
 
         response = self.client().get(
-            '/movies', headers={'Authorization': "Bearer {}".format(self.casting_assistant)})
+            '/movies', headers={'Authorization': "Bearer {}".
+                                format(self.casting_assistant)
+                                })
+
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
@@ -162,7 +181,9 @@ class CapstoneTestCase(unittest.TestCase):
         }
 
         response = self.client().post('/movies', headers={
-            'Authorization': "Bearer {}".format(self.executive_producer)}, json=movie_dict)
+            'Authorization': "Bearer {}".
+            format(self.executive_producer)},
+            json=movie_dict)
 
         data = json.loads(response.data)
 
@@ -172,7 +193,10 @@ class CapstoneTestCase(unittest.TestCase):
     def test_edit_movie(self):
 
         response = self.client().patch('/movies/1',
-                                       headers={'Authorization': "Bearer {}".format(self.casting_director)}, json={'title': 'interstellar 2'})
+                                       headers={
+                                           'Authorization': "Bearer {}".
+                                           format(self.casting_director)},
+                                       json={'title': 'interstellar 2'})
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
@@ -181,7 +205,10 @@ class CapstoneTestCase(unittest.TestCase):
     def error_404_test_edit_movie(self):
 
         response = self.client().patch('/movies/999',
-                                       headers={'Authorization': "Bearer {}".format(self.casting_director)}, json={'title': 'interstellar 2'})
+                                       headers={
+                                           'Authorization': "Bearer {}".
+                                           format(self.casting_director)},
+                                       json={'title': 'interstellar 2'})
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 404)
